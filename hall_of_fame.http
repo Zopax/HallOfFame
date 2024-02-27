@@ -1,0 +1,6 @@
+@hall_of_fame_HostAddress = http://localhost:5207
+
+GET {{hall_of_fame_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

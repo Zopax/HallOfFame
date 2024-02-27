@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\hall_of_fame.props" />
+</Project>
