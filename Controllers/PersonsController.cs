@@ -8,7 +8,7 @@ namespace hall_of_fame.Controllers
     public class PersonsController : Controller
     {
         [HttpGet]
-        public IEnumerable<Person> GetPersonsList() => Helper.GetContext().Persons.ToList();
+        public IEnumerable<Person> GetPersonsList() => Helper.GetContext().Persons.Include(w => w.PersonSkills).ToList();
 
         [HttpGet("{id}")]
         public IActionResult GetPerson(long id)
@@ -23,13 +23,13 @@ namespace hall_of_fame.Controllers
             return Ok(person);
         }
 
-        private int NextProductId()
+        private int NextPersonId()
         {
             List<Person> persons = Helper.GetContext().Persons.ToList();
             return persons.Count() == 0 ? 1 : persons.Max(w => w.Id) + 1;
         }
 
-        [HttpPost]
+        [HttpPost("AddPerson")]
         public IActionResult PostPerson(Person person)
         {
             if (!ModelState.IsValid)
@@ -37,14 +37,18 @@ namespace hall_of_fame.Controllers
                 return BadRequest(ModelState);
             }
 
-            person.Id = NextProductId();
-            Helper.GetContext().Add(person);
+            person.Id = NextPersonId();
+
+            Console.WriteLine(person.PersonSkills.Count());
+            Helper.GetContext().Persons.Add(person);
+            Helper.GetContext().Skills.AddRange(person.Skills);
+            Helper.GetContext().PersonSkills.AddRange(person.PersonSkills);
             Helper.GetContext().SaveChanges();
             return CreatedAtAction(nameof(GetPersonsList), new { id = person.Id },
                 person);
         }
 
-        [HttpPost("AddPerson")]
+        [HttpPost]
         public IActionResult PostBody([FromBody] Person person) => PostPerson(person);
     }
 }

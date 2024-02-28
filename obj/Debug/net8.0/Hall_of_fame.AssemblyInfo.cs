@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hall_of_fame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84f19a922a8f3b1407e5be53e93b7cf95a1af125")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66887f3ad9d8156e71c4e4734d8052d71a95ada9")]
 [assembly: System.Reflection.AssemblyProductAttribute("hall_of_fame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hall_of_fame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

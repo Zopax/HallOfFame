@@ -7,7 +7,7 @@ namespace Hall_of_fame.models
     {
         public DbSet<Skill> Skills { get; set; } = null!;
         public DbSet<Person> Persons { get; set; } = null!;
-        //public DbSet<PersonSkill> PersonSkills { get; set; } = null!;
+        public DbSet<PersonSkill> PersonSkills { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
