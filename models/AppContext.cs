@@ -1,5 +1,4 @@
-﻿using hall_of_fame.models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Hall_of_fame.models
 {
@@ -7,7 +6,6 @@ namespace Hall_of_fame.models
     {
         public DbSet<Skill> Skills { get; set; } = null!;
         public DbSet<Person> Persons { get; set; } = null!;
-        public DbSet<PersonSkill> PersonSkills { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,24 +14,10 @@ namespace Hall_of_fame.models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>()
-                .HasMany(p => p.Skills)
-                .WithMany(s => s.Persons)
-                .UsingEntity<PersonSkill>(
-                    j => j
-                        .HasOne(w => w.Skill)
-                        .WithMany(t => t.PersonSkills)
-                        .HasForeignKey(w => w.SkillId),
-                    j => j
-                        .HasOne(w => w.Person)
-                        .WithMany(t => t.PersonSkills)
-                        .HasForeignKey(w => w.PersonId),
-                    j =>
-                    {
-                        j.Property(w => w.Level).HasDefaultValue(0);
-                        j.HasKey(t => new { t.PersonId, t.SkillId });
-                        j.ToTable("PersonSkill");
-                    });
+            modelBuilder.Entity<Skill>()
+                .HasOne(p => p.Person)
+                .WithMany(s => s.Skills)
+                .HasForeignKey(p => p.Id);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HrFqDBiaG1ujgG1HeVlr6dYeQjvjLLFguo8ag6xYoGlXsXVl0TvigusI8PQDhIwt4uD6P0BXwDZWcf3s6iC93w==",
+  "dgSpecHash": "2XxtS99fqMnPSMhNVJ4HqDdMWT22JBj+jY1gqG0+2iJVPF4CNdIm/k+HcT43P+mBdGQAlPgFAem3ZbkWelCGiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Администратор\\Desktop\\Hall_of_fame\\Hall_of_fame\\hall_of_fame\\hall_of_fame.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "C:\\Users\\Администратор\\.nuget\\packages\\npgsql\\8.0.2\\npgsql.8.0.2.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.2\\npgsql.entityframeworkcore.postgresql.8.0.2.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",

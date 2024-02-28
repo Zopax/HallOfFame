@@ -1,5 +1,4 @@
-﻿using hall_of_fame.models;
-using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 
 namespace Hall_of_fame.models
@@ -8,10 +7,9 @@ namespace Hall_of_fame.models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public int Level { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Person> Persons { get; set; } = new List<Person>();
-        [JsonIgnore]
-        public virtual ICollection<PersonSkill> PersonSkills { get; set; } = new List<PersonSkill>();
+        public Person? Person { get; set; }
     }
 }

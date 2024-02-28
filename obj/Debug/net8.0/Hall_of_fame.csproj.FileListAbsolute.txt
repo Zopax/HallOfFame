@@ -104,3 +104,4 @@ C:\Users\Администратор\Desktop\Hall_of_fame\hall_of_fame\hall_of_fa
 C:\Users\Администратор\Desktop\Hall_of_fame\hall_of_fame\hall_of_fame\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Администратор\Desktop\Hall_of_fame\hall_of_fame\hall_of_fame\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Администратор\Desktop\Hall_of_fame\Hall_of_fame\hall_of_fame\obj\Debug\net8.0\hall_of_fame.sourcelink.json
+C:\Users\Администратор\Desktop\Hall_of_fame\Hall_of_fame\hall_of_fame\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll

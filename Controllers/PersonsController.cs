@@ -1,6 +1,6 @@
 ﻿using Hall_of_fame.models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace hall_of_fame.Controllers
 {
@@ -8,7 +8,7 @@ namespace hall_of_fame.Controllers
     public class PersonsController : Controller
     {
         [HttpGet]
-        public IEnumerable<Person> GetPersonsList() => Helper.GetContext().Persons.Include(w => w.PersonSkills).ToList();
+        public IEnumerable<Person> GetPersonsList() => Helper.GetContext().Persons.ToList();
 
         [HttpGet("{id}")]
         public IActionResult GetPerson(int id)
@@ -48,42 +48,51 @@ namespace hall_of_fame.Controllers
                 return NotFound();
             }
 
-            searchPerson.Name = person.Name;
-            searchPerson.DisplayName = person.DisplayName;
-            searchPerson.PersonSkills = person.PersonSkills;
-            searchPerson.Skills = person.Skills;
+            
 
             Helper.GetContext().Persons.Update(searchPerson);
             Helper.GetContext().SaveChanges();
             return Ok();
         }
 
-        private int NextPersonId()
+        private int NextObjectId(List<Person> person)
         {
-            List<Person> persons = Helper.GetContext().Persons.ToList();
-            return persons.Count() == 0 ? 1 : persons.Max(w => w.Id) + 1;
+            return person.Count() == 0 ? 1 : person.Max(w => w.Id) + 1;
+        }
+
+        private int NextObjectId(List<Skill> skill)
+        {
+            return skill.Count() == 0 ? 1 : skill.Max(w => w.Id) + 1;
         }
 
         [HttpPost("AddPerson")]
-        public IActionResult PostPerson(Person person)
+        public IActionResult PostPerson([FromForm]Person personInput)
         {
-            if (!ModelState.IsValid)
+
+            foreach (var s in personInput.Skills)
             {
-                return BadRequest(ModelState);
+                Console.WriteLine(s.Name);
             }
 
-            person.Id = NextPersonId();
+            try
+            {
+                Person newPerson = new Person
+                {
+                    Id = NextObjectId(Helper.GetContext().Persons.ToList()) + 1,
+                    Name = personInput.Name,
+                    DisplayName = personInput.DisplayName,
+                    Skills = personInput.Skills,
+                };
 
-            Console.WriteLine(person.PersonSkills.Count());
-            Helper.GetContext().Persons.Add(person);
-            Helper.GetContext().Skills.AddRange(person.Skills);
-            Helper.GetContext().PersonSkills.AddRange(person.PersonSkills);
-            Helper.GetContext().SaveChanges();
-            return CreatedAtAction(nameof(GetPersonsList), new { id = person.Id },
-                person);
+               // Helper.GetContext().Persons.Add(newPerson);
+                //Helper.GetContext().SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
-        [HttpPost]
-        public IActionResult PostBody([FromBody] Person person) => PostPerson(person);
     }
 }

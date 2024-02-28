@@ -43,10 +43,10 @@ namespace hall_of_fame.Migrations
             modelBuilder.Entity("Hall_of_fame.models.Skill", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -56,53 +56,20 @@ namespace hall_of_fame.Migrations
                     b.ToTable("Skills");
                 });
 
-            modelBuilder.Entity("hall_of_fame.models.PersonSkill", b =>
-                {
-                    b.Property<int>("PersonId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SkillId")
-                        .HasColumnType("integer");
-
-                    b.Property<byte>("Level")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint")
-                        .HasDefaultValue((byte)0);
-
-                    b.HasKey("PersonId", "SkillId");
-
-                    b.HasIndex("SkillId");
-
-                    b.ToTable("PersonSkill", (string)null);
-                });
-
-            modelBuilder.Entity("hall_of_fame.models.PersonSkill", b =>
+            modelBuilder.Entity("Hall_of_fame.models.Skill", b =>
                 {
                     b.HasOne("Hall_of_fame.models.Person", "Person")
-                        .WithMany("PersonSkills")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hall_of_fame.models.Skill", "Skill")
-                        .WithMany("PersonSkills")
-                        .HasForeignKey("SkillId")
+                        .WithMany("Skills")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
-
-                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Hall_of_fame.models.Person", b =>
                 {
-                    b.Navigation("PersonSkills");
-                });
-
-            modelBuilder.Entity("Hall_of_fame.models.Skill", b =>
-                {
-                    b.Navigation("PersonSkills");
+                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }
