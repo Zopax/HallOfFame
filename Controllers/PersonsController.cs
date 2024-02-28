@@ -11,7 +11,7 @@ namespace hall_of_fame.Controllers
         public IEnumerable<Person> GetPersonsList() => Helper.GetContext().Persons.Include(w => w.PersonSkills).ToList();
 
         [HttpGet("{id}")]
-        public IActionResult GetPerson(long id)
+        public IActionResult GetPerson(int id)
         {
             Person? person = Helper.GetContext().Persons.FirstOrDefault(w => w.Id == id);
 
@@ -21,6 +21,41 @@ namespace hall_of_fame.Controllers
             }
 
             return Ok(person);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePerson(int id)
+        {
+            Person? person = Helper.GetContext().Persons.FirstOrDefault(x => x.Id == id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            Helper.GetContext().Persons.Remove(person);
+            Helper.GetContext().SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult PutPerson(Person person)
+        {
+            Person? searchPerson = Helper.GetContext().Persons.FirstOrDefault(w => w.Id == person.Id);
+            if (searchPerson == null)
+            {
+                return NotFound();
+            }
+
+            searchPerson.Name = person.Name;
+            searchPerson.DisplayName = person.DisplayName;
+            searchPerson.PersonSkills = person.PersonSkills;
+            searchPerson.Skills = person.Skills;
+
+            Helper.GetContext().Persons.Update(searchPerson);
+            Helper.GetContext().SaveChanges();
+            return Ok();
         }
 
         private int NextPersonId()
